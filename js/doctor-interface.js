@@ -3,14 +3,14 @@ var Doctor = require('./../js/doctor.js').doctorModule;
 
 var displayAllInfo = function(medicalIssue, doctors) {
     doctors.forEach(function(doctor) {
-    $('.output').append(`<li id="doctor-click"> <a href="doctor.html">${doctor.title}</a> </li>`);
+    var lastName = data.profile.last_name;
+    $('.output').append(lastName);
     $('#doctor-click').click(function(){
       var doctor = new Doctor();
       doctor.getDoctorInfo(doctor.id);
     });
   });
 };
-
 
 
 
