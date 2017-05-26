@@ -1,16 +1,26 @@
 var Doctor = require('./../js/doctor.js').doctorModule;
 
-var displayFirst = function(medicalIssue, displayFirst) {
-  $('.showDoctor').text("The humidity in " + medicalIssue + " is " + displayFirst);
-}
-//
+
+var displayAllInfo = function(medicalIssue, doctors) {
+    doctors.forEach(function(doctor) {
+    $('.output').append(`<li id="doctor-click"> <a href="doctor.html">${doctor.title}</a> </li>`);
+    $('#doctor-click').click(function(){
+      var doctor = new Doctor();
+      doctor.getDoctorInfo(doctor.id);
+    });
+  });
+};
 
 
-$(document).ready(function() {
+
+
+
+$(document).ready(function(){
   var doctor = new Doctor();
-  $("#condition-form").submit(function(e){
-    e.preventDefault();
-    condition = $('#condition').val();
-    doctor.getDoctor(condition, displayFirst);
+  $('#doctor-list').click(function(){
+    var medicalIssue = $('#issue').val();
+    doctor.getAllDoctors(medicalIssue, displayAllInfo);
   });
 });
+
+exports.doctorModule = Doctor;
