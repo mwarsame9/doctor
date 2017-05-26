@@ -1,15 +1,15 @@
 var Doctor = require('./../js/doctor.js').doctorModule;
 
 
-var displayAllInfo = function(medicalIssue, doctors) {
-    doctors.forEach(function(doctor) {
-    var lastName = data.profile.last_name;
-    $('.output').append(lastName);
-    $('#doctor-click').click(function(){
-      var doctor = new Doctor();
-      doctor.getDoctorInfo(doctor.last_name);
-    });
-  });
+var displayAllInfo = function(medicalIssue, doctorsInfo) {
+    // doctors.forEach(function(doctor) {
+    // var lastName = data.profile.last_name;
+    $('.showDoctor').text("These doctors that treat " + medicalIssue + " are " + doctorsInfo);
+  //   $('#doctor-click').click(function(){
+  //     var doctor = new Doctor();
+  //     doctor.getDoctorInfo(doctor.last_name);
+  //   });
+  // });
 };
 
 
@@ -22,5 +22,3 @@ $(document).ready(function(){
     doctor.getAllDoctors(medicalIssue, displayAllInfo);
   });
 });
-
-exports.doctorModule = Doctor;

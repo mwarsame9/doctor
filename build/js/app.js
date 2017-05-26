@@ -10,7 +10,7 @@ Doctor = function() {
 
 Doctor.prototype.getAllDoctors = function(medicalIssue, displayAllInfo) {
   $.get(`https://api.betterdoctor.com/2016-03-01/doctors?query=+ "${medicalIssue}"&location=45.5231%2C-122.6765%2C%205&user_location=45.5231%2C-122.6765&skip=0&limit=20&user_key=${apiKey}`).then(function(result){
-  displayAllInfo(medicalIssue, response['doctors']);
+  displayAllInfo(medicalIssue, result);
   console.log(displayAllInfo);
   }).fail(function(error) {
     $('.output').text(error.responseJSON.message);
@@ -25,15 +25,15 @@ exports.doctorModule = Doctor;
 var Doctor = require('./../js/doctor.js').doctorModule;
 
 
-var displayAllInfo = function(medicalIssue, doctors) {
-    doctors.forEach(function(doctor) {
-    var lastName = data.profile.last_name;
-    $('.output').append(lastName);
-    $('#doctor-click').click(function(){
-      var doctor = new Doctor();
-      doctor.getDoctorInfo(doctor.last_name);
-    });
-  });
+var displayAllInfo = function(medicalIssue, doctorsInfo) {
+    // doctors.forEach(function(doctor) {
+    // var lastName = data.profile.last_name;
+    $('.showDoctor').text("These doctors that treat " + medicalIssue + " are " + doctorsInfo);
+  //   $('#doctor-click').click(function(){
+  //     var doctor = new Doctor();
+  //     doctor.getDoctorInfo(doctor.last_name);
+  //   });
+  // });
 };
 
 
@@ -46,7 +46,5 @@ $(document).ready(function(){
     doctor.getAllDoctors(medicalIssue, displayAllInfo);
   });
 });
-
-exports.doctorModule = Doctor;
 
 },{"./../js/doctor.js":2}]},{},[3]);
