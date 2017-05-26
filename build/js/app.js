@@ -31,7 +31,7 @@ var displayAllInfo = function(medicalIssue, doctors) {
     $('.output').append(lastName);
     $('#doctor-click').click(function(){
       var doctor = new Doctor();
-      doctor.getDoctorInfo(doctor.id);
+      doctor.getDoctorInfo(doctor.last_name);
     });
   });
 };
