@@ -9,11 +9,12 @@ Doctor = function() {
 
 
 Doctor.prototype.getAllDoctors = function(medicalIssue, displayAllInfo) {
-  $.get(`https://api.betterdoctor.com/2016-03-01/doctors?query=+ "${medicalIssue}"&location=45.5231%2C-122.6765%2C%205&user_location=45.5231%2C-122.6765&skip=0&limit=20&user_key=${apiKey}`).then(function(result){
-  displayAllInfo(medicalIssue, result);
-  console.log(displayAllInfo);
+  $.get('https://api.betterdoctor.com/2016-03-01/doctors?query='+ medicalIssue + '&location=45.5231%2C-122.6765%2C%205&user_location=45.5231%2C-122.6765&skip=0&limit=20&user_key=' + apiKey).then(function(result){
+  displayAllInfo(result);
+  console.log(result.meta.item_type);
   }).fail(function(error) {
-    $('.output').text(error.responseJSON.message);
+    console.log("fail");
+    // $('.output').text(error.responseJSON.message);
   });
 };
 
@@ -21,28 +22,33 @@ Doctor.prototype.getAllDoctors = function(medicalIssue, displayAllInfo) {
 
 exports.doctorModule = Doctor;
 
+// https://api.betterdoctor.com/2016-03-01/doctors?query=+ "${medicalIssue}"&user_location=45.523%2C-122.413&skip=0&limit=10&user_key=81a8192ea8aefbc9eb73bbfd7639c587
+
 },{"./../.env":1}],3:[function(require,module,exports){
 var Doctor = require('./../js/doctor.js').doctorModule;
 
 
 var displayAllInfo = function(medicalIssue, doctorsInfo) {
-    // doctors.forEach(function(doctor) {
+    doctorsInfo.data.forEach(function(doctorInfo) {
     // var lastName = data.profile.last_name;
-    $('.showDoctor').text("These doctors that treat " + medicalIssue + " are " + doctorsInfo);
+    $('.showDoctors').append('<li>' + '>' + doctor.profile.first_name + ' ' + doctor.profile.last_name + ' ' +  doctor.profile.bio + ' ' + '</li>' + '<br>');
+});
+};
+
+
   //   $('#doctor-click').click(function(){
   //     var doctor = new Doctor();
   //     doctor.getDoctorInfo(doctor.last_name);
   //   });
   // });
-};
-
 
 
 
 $(document).ready(function(){
   var doctor = new Doctor();
-  $('#doctor-list').click(function(){
-    var medicalIssue = $('#issue').val();
+  $('#submitIssue').click(function(){
+    var medicalIssue = $('#medicalIssue').val();
+    $('#medicalIssue').val("");
     doctor.getAllDoctors(medicalIssue, displayAllInfo);
   });
 });

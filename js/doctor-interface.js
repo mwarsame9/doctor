@@ -2,23 +2,26 @@ var Doctor = require('./../js/doctor.js').doctorModule;
 
 
 var displayAllInfo = function(medicalIssue, doctorsInfo) {
-    // doctors.forEach(function(doctor) {
+    doctorsInfo.data.forEach(function(doctorInfo) {
     // var lastName = data.profile.last_name;
-    $('.showDoctor').text("These doctors that treat " + medicalIssue + " are " + doctorsInfo);
+    $('.showDoctors').append('<li>' + '>' + doctor.profile.first_name + ' ' + doctor.profile.last_name + ' ' +  doctor.profile.bio + ' ' + '</li>' + '<br>');
+});
+};
+
+
   //   $('#doctor-click').click(function(){
   //     var doctor = new Doctor();
   //     doctor.getDoctorInfo(doctor.last_name);
   //   });
   // });
-};
-
 
 
 
 $(document).ready(function(){
   var doctor = new Doctor();
-  $('#doctor-list').click(function(){
-    var medicalIssue = $('#issue').val();
+  $('#submitIssue').click(function(){
+    var medicalIssue = $('#medicalIssue').val();
+    $('#medicalIssue').val("");
     doctor.getAllDoctors(medicalIssue, displayAllInfo);
   });
 });
