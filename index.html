@@ -3,6 +3,7 @@
   <head>
     <link rel="stylesheet" href="build/css/vendor.css">
     <link rel="stylesheet" href="build/css/styles.css">
+    <link href="https://fonts.googleapis.com/css?family=Domine" rel="stylesheet">
     <script src="build/js/vendor.min.js"></script>
     <script src="build/js/app.js"></script>
     <title>Doctor Lookup</title>
@@ -10,14 +11,13 @@
   <body>
     <div class="container">
       <div class="box">
-        <form id=issue-form>
           <label for="issue">Enter a medical issue:</label>
           <input id="issue" type="text">
           <button type="submit" class="btn btn-primary" id="doctor-list">Get Doctors</button>
-        </form>
       </div>
+      <br><br><hr>
       <div>
-        <ul class="showDoctor">
+        <ul id="showDoctor">
         </ul>
       </div>
     </div>
